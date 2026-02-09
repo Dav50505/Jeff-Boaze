@@ -107,9 +107,21 @@ export default function About() {
       {/* Jeff & Tyler */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="bg-primary-800 rounded-2xl p-8 md:p-12 text-white">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
+          <div className="bg-primary-800 rounded-2xl overflow-hidden">
+            <div className="grid md:grid-cols-2 gap-0">
+              {/* Image side */}
+              <div className="relative h-64 md:h-auto">
+                <img
+                  src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&q=80"
+                  alt="Professional plumber at work with tools"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-primary-900/40" />
+              </div>
+              
+              {/* Content side */}
+              <div className="p-8 md:p-12 text-white">
                 <h2 className="text-3xl font-bold mb-4">Meet Jeff & Tyler</h2>
                 <p className="text-primary-200 leading-relaxed mb-4">
                   When Jeff Boaze shows up at your door, you're getting the owner — not a sub-contractor.
@@ -117,7 +129,7 @@ export default function About() {
                   his side, you get the combined expertise of 4th generation master plumbers who truly care
                   about doing the job right.
                 </p>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 mb-6">
                   <div className="flex gap-0.5 text-accent-500">
                     {[...Array(5)].map((_, i) => (
                       <StarIcon key={i} className="w-5 h-5" />
@@ -125,27 +137,27 @@ export default function About() {
                   </div>
                   <span className="text-sm text-primary-300">5.0 stars · 150+ Google Reviews</span>
                 </div>
-              </div>
-              <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-3 bg-white/10 rounded-lg px-4 py-3">
-                  <ClockIcon className="w-6 h-6 text-accent-500 shrink-0" />
-                  <div>
-                    <div className="font-semibold">40+ Years Combined Experience</div>
-                    <div className="text-sm text-primary-300">Thousands of homes serviced</div>
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-3 bg-white/10 rounded-lg px-4 py-3">
+                    <ClockIcon className="w-6 h-6 text-accent-500 shrink-0" />
+                    <div>
+                      <div className="font-semibold">40+ Years Combined Experience</div>
+                      <div className="text-sm text-primary-300">Thousands of homes serviced</div>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-3 bg-white/10 rounded-lg px-4 py-3">
-                  <ShieldCheckIcon className="w-6 h-6 text-accent-500 shrink-0" />
-                  <div>
-                    <div className="font-semibold">Fully Licensed & Insured</div>
-                    <div className="text-sm text-primary-300">CA License #1012513</div>
+                  <div className="flex items-center gap-3 bg-white/10 rounded-lg px-4 py-3">
+                    <ShieldCheckIcon className="w-6 h-6 text-accent-500 shrink-0" />
+                    <div>
+                      <div className="font-semibold">Fully Licensed & Insured</div>
+                      <div className="text-sm text-primary-300">CA License #1012513</div>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-3 bg-white/10 rounded-lg px-4 py-3">
-                  <UserGroupIcon className="w-6 h-6 text-accent-500 shrink-0" />
-                  <div>
-                    <div className="font-semibold">Owner-Operated</div>
-                    <div className="text-sm text-primary-300">Jeff personally oversees every job</div>
+                  <div className="flex items-center gap-3 bg-white/10 rounded-lg px-4 py-3">
+                    <UserGroupIcon className="w-6 h-6 text-accent-500 shrink-0" />
+                    <div>
+                      <div className="font-semibold">Owner-Operated</div>
+                      <div className="text-sm text-primary-300">Jeff personally oversees every job</div>
+                    </div>
                   </div>
                 </div>
               </div>

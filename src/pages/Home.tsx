@@ -55,9 +55,18 @@ export default function Home() {
       {/*  HERO                                                          */}
       {/* ============================================================= */}
       <section className="relative bg-linear-to-br from-primary-800 via-primary-700 to-primary-900 text-white overflow-hidden">
-        {/* Decorative circles */}
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-primary-600/20 blur-3xl" />
-        <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full bg-primary-500/10 blur-3xl" />
+        {/* Background image with overlay */}
+        <div className="absolute inset-0 opacity-20">
+          <img
+            src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1920&q=80"
+            alt=""
+            className="w-full h-full object-cover"
+            loading="eager"
+          />
+        </div>
+        
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-linear-to-br from-primary-800/95 via-primary-700/90 to-primary-900/95" />
 
         <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-28 lg:py-36">
           <div className="max-w-3xl">

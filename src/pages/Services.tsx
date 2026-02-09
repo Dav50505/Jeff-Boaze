@@ -20,54 +20,63 @@ const SERVICES = [
     title: 'Water Heater Services',
     desc: 'Whether your water heater needs a repair, replacement, or a brand-new installation, our technicians handle both traditional tank and modern tankless systems. We help you choose the most efficient and cost-effective option for your home.',
     bullets: ['Traditional water heater repair & replacement', 'Tankless water heater installation & service', 'Energy-efficient upgrades', 'Emergency hot water restoration'],
+    image: 'https://jeff-boaze-plumbing.com/wp-content/uploads/2017/11/AdobeStock_62721104_Preview-340x227.jpg',
   },
   {
     icon: WrenchScrewdriverIcon,
     title: 'Plumbing Service & Repair',
     desc: 'From minor leaks to complete re-pipes, we service all types of plumbing systems. Our team is trained in Wirsbo, Wardflex, Pex Piping, copper, ABS, and all water, sewer, and gas systems.',
     bullets: ['Leak detection & repair', 'Pipe replacement & re-piping', 'Water pressure issues', 'All pipe materials: copper, PEX, ABS, CPVC'],
+    image: 'http://jeff-boaze-plumbing.com/wp-content/uploads/2017/02/Faucet-2-sm.jpg',
   },
   {
     icon: BoltIcon,
     title: 'Emergency Plumbing Services',
     desc: 'Plumbing emergencies don\'t wait — and neither do we. Call us anytime for burst pipes, major leaks, sewer backups, gas leaks, and more. We respond quickly to protect your home.',
     bullets: ['Burst pipe repair', 'Sewer backup resolution', 'Gas leak response', 'Flood damage mitigation'],
+    image: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400&q=80',
   },
   {
     icon: HomeModernIcon,
     title: 'Residential Plumbing Construction',
     desc: 'Jeff has plumbed thousands of homes from the ground up, from starter homes to 18,000+ sq. ft. custom estates. We partner with top general contractors to make your vision a reality.',
     bullets: ['New home construction plumbing', 'Custom home builds', 'Kitchen & bathroom remodels', 'Addition & expansion plumbing'],
+    image: 'http://jeff-boaze-plumbing.com/wp-content/uploads/2017/10/Plumbing-Plans-sm.jpg',
   },
   {
     icon: CogIcon,
     title: 'Plumbing Fixtures Installation',
     desc: 'Upgrade your kitchen or bathroom with professional fixture installation. We handle faucets, sinks, showers, bathtubs, and more — ensuring everything is installed to code.',
     bullets: ['Faucet & sink installation', 'Shower & bathtub replacement', 'Outdoor hose bibs', 'ADA-compliant fixture installs'],
+    image: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80',
   },
   {
     icon: CogIcon,
     title: 'Garbage Disposal Solutions',
     desc: 'Whether your disposal is jammed, leaking, or needs a full replacement, we provide fast and affordable service to keep your kitchen running smoothly.',
     bullets: ['Garbage disposal repair', 'New disposal installation', 'InSinkErator & all major brands', 'Dishwasher hookup coordination'],
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80',
   },
   {
     icon: WrenchScrewdriverIcon,
     title: 'Toilet Repair & Installation',
     desc: 'From running toilets to complete replacements, we fix it fast. We also install low-flow and high-efficiency models to save water and money.',
     bullets: ['Toilet leak & clog repair', 'Wax ring & flange replacement', 'New toilet installation', 'Low-flow & dual-flush upgrades'],
+    image: 'https://images.unsplash.com/photo-1620626011761-996317b8d101?w=400&q=80',
   },
   {
     icon: CheckCircleIcon,
     title: 'Sewer & Drain Service',
     desc: 'Slow drains, sewer odors, or backups? We diagnose and resolve drain and sewer line issues with professional-grade equipment and decades of experience.',
     bullets: ['Drain cleaning & clearing', 'Sewer line repair & replacement', 'Video camera inspection', 'Root intrusion removal'],
+    image: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400&q=80',
   },
   {
     icon: FireIcon,
     title: 'Gas Line Services',
     desc: 'Gas line work requires precision and expertise. We handle installation, testing, and repair for natural gas and propane lines — safely and to code.',
     bullets: ['Gas line installation', 'Leak detection & repair', 'Appliance gas hookups', 'Pressure testing & certification'],
+    image: 'http://jeff-boaze-plumbing.com/wp-content/uploads/2017/11/AdobeStock_88633624_Preview-340x227.jpg',
   },
 ]
 
@@ -113,23 +122,33 @@ export default function Services() {
               <article
                 key={idx}
                 id={svc.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
-                className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-100"
+                className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100"
               >
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary-50 flex items-center justify-center shrink-0">
+                {/* Service image */}
+                <div className="relative h-48 bg-gray-100 overflow-hidden">
+                  <img
+                    src={svc.image}
+                    alt={`${svc.title} - Jeff Boaze Plumbing`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-4 left-4 w-12 h-12 rounded-lg bg-white shadow-md flex items-center justify-center">
                     <svc.icon className="w-6 h-6 text-primary-500" />
                   </div>
-                  <h2 className="text-xl md:text-2xl font-bold text-primary-800">{svc.title}</h2>
                 </div>
-                <p className="text-gray-600 leading-relaxed mb-4">{svc.desc}</p>
-                <ul className="grid sm:grid-cols-2 gap-2">
-                  {svc.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-2 text-sm text-gray-700">
-                      <CheckCircleIcon className="w-4 h-4 text-primary-400 mt-0.5 shrink-0" />
-                      {b}
-                    </li>
-                  ))}
-                </ul>
+                
+                <div className="p-6 md:p-8">
+                  <h2 className="text-xl md:text-2xl font-bold text-primary-800 mb-4">{svc.title}</h2>
+                  <p className="text-gray-600 leading-relaxed mb-4">{svc.desc}</p>
+                  <ul className="grid sm:grid-cols-2 gap-2">
+                    {svc.bullets.map((b) => (
+                      <li key={b} className="flex items-start gap-2 text-sm text-gray-700">
+                        <CheckCircleIcon className="w-4 h-4 text-primary-400 mt-0.5 shrink-0" />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </article>
             ))}
           </div>

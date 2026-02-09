@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { PhoneIcon, Bars3Icon, XMarkIcon, WrenchScrewdriverIcon } from './Icons'
+import { PhoneIcon, Bars3Icon, XMarkIcon } from './Icons'
 
 const NAV_ITEMS = [
   { label: 'Home', to: '/' },
@@ -30,11 +30,16 @@ export default function Header() {
       <header className="sticky top-0 z-50 bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 h-16 md:h-20 flex items-center justify-between">
           {/* Logo / brand */}
-          <Link to="/" className="flex items-center gap-2 shrink-0" aria-label="Jeff Boaze Plumbing home">
-            <WrenchScrewdriverIcon className="w-8 h-8 text-primary-500" />
-            <div className="leading-tight">
+          <Link to="/" className="flex items-center gap-3 shrink-0" aria-label="Jeff Boaze Plumbing home">
+            <img
+              src="https://jeff-boaze-plumbing.com/wp-content/uploads/2017/12/JeffB-Logo2.png"
+              alt="Jeff Boaze Plumbing logo"
+              className="h-12 md:h-14 w-auto"
+              loading="eager"
+            />
+            <div className="leading-tight hidden sm:block">
               <span className="text-primary-700 font-bold text-lg md:text-xl tracking-tight">Jeff Boaze Plumbing</span>
-              <span className="hidden sm:block text-[11px] text-gray-500 -mt-0.5">Never a Problem, Only a Solution</span>
+              <span className="block text-[11px] text-gray-500 -mt-0.5">Never a Problem, Only a Solution</span>
             </div>
           </Link>
 
