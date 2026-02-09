@@ -32,7 +32,7 @@ export default function Header() {
           {/* Logo / brand */}
           <Link to="/" className="flex items-center gap-3 shrink-0" aria-label="Jeff Boaze Plumbing home">
             <img
-              src="https://jeff-boaze-plumbing.com/wp-content/uploads/2017/12/JeffB-Logo2.png"
+              src="/images/JeffB-Logo2.png"
               alt="Jeff Boaze Plumbing logo"
               className="h-12 md:h-14 w-auto"
               loading="eager"

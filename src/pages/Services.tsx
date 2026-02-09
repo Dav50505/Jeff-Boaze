@@ -20,14 +20,14 @@ const SERVICES = [
     title: 'Water Heater Services',
     desc: 'Whether your water heater needs a repair, replacement, or a brand-new installation, our technicians handle both traditional tank and modern tankless systems. We help you choose the most efficient and cost-effective option for your home.',
     bullets: ['Traditional water heater repair & replacement', 'Tankless water heater installation & service', 'Energy-efficient upgrades', 'Emergency hot water restoration'],
-    image: 'https://jeff-boaze-plumbing.com/wp-content/uploads/2017/11/AdobeStock_62721104_Preview-340x227.jpg',
+    image: '/images/AdobeStock_62721104_Preview-340x227.jpg',
   },
   {
     icon: WrenchScrewdriverIcon,
     title: 'Plumbing Service & Repair',
     desc: 'From minor leaks to complete re-pipes, we service all types of plumbing systems. Our team is trained in Wirsbo, Wardflex, Pex Piping, copper, ABS, and all water, sewer, and gas systems.',
     bullets: ['Leak detection & repair', 'Pipe replacement & re-piping', 'Water pressure issues', 'All pipe materials: copper, PEX, ABS, CPVC'],
-    image: 'http://jeff-boaze-plumbing.com/wp-content/uploads/2017/02/Faucet-2-sm.jpg',
+    image: '/images/Faucet-2-sm.jpg',
   },
   {
     icon: BoltIcon,
@@ -41,7 +41,7 @@ const SERVICES = [
     title: 'Residential Plumbing Construction',
     desc: 'Jeff has plumbed thousands of homes from the ground up, from starter homes to 18,000+ sq. ft. custom estates. We partner with top general contractors to make your vision a reality.',
     bullets: ['New home construction plumbing', 'Custom home builds', 'Kitchen & bathroom remodels', 'Addition & expansion plumbing'],
-    image: 'http://jeff-boaze-plumbing.com/wp-content/uploads/2017/10/Plumbing-Plans-sm.jpg',
+    image: '/images/Plumbing-Plans-sm.jpg',
   },
   {
     icon: CogIcon,
@@ -76,7 +76,7 @@ const SERVICES = [
     title: 'Gas Line Services',
     desc: 'Gas line work requires precision and expertise. We handle installation, testing, and repair for natural gas and propane lines — safely and to code.',
     bullets: ['Gas line installation', 'Leak detection & repair', 'Appliance gas hookups', 'Pressure testing & certification'],
-    image: 'http://jeff-boaze-plumbing.com/wp-content/uploads/2017/11/AdobeStock_88633624_Preview-340x227.jpg',
+    image: '/images/AdobeStock_88633624_Preview-340x227.jpg',
   },
 ]
 
