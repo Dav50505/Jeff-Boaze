@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
+import type { ComponentType } from 'react'
 import RequestEstimateForm from '../components/RequestEstimateForm'
+import { SERVICES_DATA, type ServiceSlug } from '../data/servicesContent'
 import {
   PhoneIcon,
   StarIcon,
@@ -19,14 +21,32 @@ import {
 /*  Data                                                               */
 /* ------------------------------------------------------------------ */
 
-const SERVICES = [
-  { icon: FireIcon, title: 'Water Heater Services', desc: 'Tankless & traditional repair, replacement, and new installation.' },
-  { icon: WrenchScrewdriverIcon, title: 'Plumbing Repair & Service', desc: 'Wirsbo, Wardflex, Pex, copper, ABS, water, sewer & gas systems.' },
-  { icon: BoltIcon, title: 'Emergency Plumbing', desc: 'Fast, reliable emergency repairs when you need help now.' },
-  { icon: HomeModernIcon, title: 'Residential Construction', desc: 'New-construction plumbing from the ground up — custom homes to remodels.' },
-  { icon: CogIcon, title: 'Fixtures & Disposals', desc: 'Faucets, sinks, garbage disposals, and all plumbing fixture installs.' },
-  { icon: CheckCircleIcon, title: 'Sewer, Drain & Gas', desc: 'Sewer line repair, drain cleaning, and gas line installation & testing.' },
-]
+const SERVICE_ICON_BY_SLUG: Record<ServiceSlug, ComponentType<{ className?: string }>> = {
+  'residential-plumbing-construction': HomeModernIcon,
+  'plumbing-services-repair-replacement': WrenchScrewdriverIcon,
+  'plumbing-fixture-installation': CogIcon,
+  'water-heater': FireIcon,
+  'tankless-water-heaters': BoltIcon,
+  'garbage-disposal-solutions': CheckCircleIcon,
+  'toilet-repair-installation': ShieldCheckIcon,
+}
+
+const SERVICE_CARD_DESCRIPTION_BY_SLUG: Record<ServiceSlug, string> = {
+  'residential-plumbing-construction':
+    'New construction and remodel plumbing with code-compliant planning, rough-in, and finish work.',
+  'plumbing-services-repair-replacement':
+    'Expert repairs and replacements for water, sewer, gas, and whole-home plumbing systems.',
+  'plumbing-fixture-installation':
+    'Professional installation and replacement of sinks, faucets, showers, tubs, and kitchen fixtures.',
+  'water-heater':
+    'Water heater repair, replacement, and installation for reliable hot water every day.',
+  'tankless-water-heaters':
+    'On-demand tankless water heater solutions designed for efficiency, performance, and long-term savings.',
+  'garbage-disposal-solutions':
+    'Garbage disposal troubleshooting, repair, and replacement to keep your kitchen running smoothly.',
+  'toilet-repair-installation':
+    'Toilet diagnostics, repair, and new installation to stop leaks, clogs, and constant running.',
+}
 
 const WHY_US = [
   { icon: UserGroupIcon, title: '4th Generation Family Business', desc: 'Plumbing excellence passed down through four generations of the Boaze family.' },
@@ -54,24 +74,29 @@ export default function Home() {
       {/* ============================================================= */}
       {/*  HERO                                                          */}
       {/* ============================================================= */}
-      <section className="relative bg-linear-to-br from-primary-800 via-primary-700 to-primary-900 text-white overflow-hidden">
-        {/* Background image with overlay */}
-        <div className="absolute inset-0 opacity-20">
-          <img
-            src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1920&q=80"
-            alt=""
-            className="w-full h-full object-cover"
-            loading="eager"
-          />
+      <section className="relative bg-white text-black overflow-hidden">
+        {/* Cycling hero background: three images, slow zoom-in then fade */}
+        <div className="absolute inset-0">
+          {[
+            '/images/hero/hero-1.png',
+            '/images/hero/hero-2.png',
+            '/images/hero/hero-3.png',
+          ].map((src, i) => (
+            <div
+              key={src}
+              className="absolute inset-0 hero-bg-slide"
+              style={{
+                backgroundImage: `url(${src})`,
+                animationDelay: `${i * 12}s`,
+              }}
+              aria-hidden
+            />
+          ))}
         </div>
-        
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-linear-to-br from-primary-800/95 via-primary-700/90 to-primary-900/95" />
-
         <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-28 lg:py-36">
           <div className="max-w-3xl">
             {/* Trust badge */}
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+            <div className="inline-flex items-center gap-2 bg-white/80 text-black border border-black/10 backdrop-blur-sm text-sm font-medium px-4 py-1.5 rounded-full mb-6">
               <span className="flex gap-0.5 text-accent-500">
                 {[...Array(5)].map((_, i) => (
                   <StarIcon key={i} className="w-4 h-4" />
@@ -80,12 +105,12 @@ export default function Home() {
               <span>5.0 Rating · 150+ Reviews</span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 text-black">
               Your Trusted <span className="text-accent-500">4th Generation</span> Plumber
             </h1>
-            <p className="text-lg md:text-xl text-primary-100 mb-8 max-w-2xl leading-relaxed">
+            <p className="text-lg md:text-xl text-black/80 mb-8 max-w-2xl leading-relaxed">
               Jeff Boaze Plumbing has proudly served Folsom, Granite Bay, and El Dorado Hills for
-              over <strong className="text-white">40 years</strong>. Family-owned, fully licensed, and
+              over <strong className="text-black">40 years</strong>. Family-owned, fully licensed, and
               committed to one simple philosophy:
             </p>
             <p className="text-2xl md:text-3xl font-bold italic text-accent-500 mb-10">
@@ -102,7 +127,7 @@ export default function Home() {
               </a>
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white font-bold text-lg px-8 py-4 rounded-xl transition-colors"
+                className="inline-flex items-center justify-center gap-2 bg-white hover:bg-black/5 border-2 border-black/20 text-black font-bold text-lg px-8 py-4 rounded-xl transition-colors"
               >
                 Request Free Estimate
               </Link>
@@ -142,27 +167,22 @@ export default function Home() {
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {SERVICES.map((svc) => (
+            {SERVICES_DATA.map((svc) => {
+              const Icon = SERVICE_ICON_BY_SLUG[svc.slug as ServiceSlug]
+              return (
               <Link
-                key={svc.title}
-                to="/services"
+                key={svc.slug}
+                to={`/services?type=${svc.slug}`}
                 className="group bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-primary-200 transition-all"
               >
-                <svc.icon className="w-10 h-10 text-primary-500 mb-4 group-hover:text-primary-600 transition-colors" />
+                <Icon className="w-10 h-10 text-primary-500 mb-4 group-hover:text-primary-600 transition-colors" />
                 <h3 className="text-lg font-bold text-primary-800 mb-1">{svc.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{svc.desc}</p>
+                <p className="text-sm text-gray-600 leading-relaxed">{SERVICE_CARD_DESCRIPTION_BY_SLUG[svc.slug as ServiceSlug]}</p>
               </Link>
-            ))}
+              )
+            })}
           </div>
 
-          <div className="text-center mt-10">
-            <Link
-              to="/services"
-              className="inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white font-bold px-6 py-3 rounded-lg transition-colors"
-            >
-              View All Services
-            </Link>
-          </div>
         </div>
       </section>
 

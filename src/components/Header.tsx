@@ -1,17 +1,34 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { PhoneIcon, Bars3Icon, XMarkIcon } from './Icons'
-
-const NAV_ITEMS = [
-  { label: 'Home', to: '/' },
-  { label: 'About', to: '/about' },
-  { label: 'Services', to: '/services' },
-  { label: 'Contact', to: '/contact' },
-]
+import { PhoneIcon, Bars3Icon, XMarkIcon, ChevronDownIcon } from './Icons'
+import { SERVICES_DATA } from '../data/servicesContent'
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
   const location = useLocation()
+  const isServicesPage = location.pathname === '/services'
+
+  // Close desktop Services dropdown on outside click or Escape
+  useEffect(() => {
+    if (!servicesOpen) return
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setServicesOpen(false)
+      }
+    }
+    function handleEscape(e: KeyboardEvent) {
+      if (e.key === 'Escape') setServicesOpen(false)
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('keydown', handleEscape)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [servicesOpen])
 
   return (
     <>
@@ -45,17 +62,70 @@ export default function Header() {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className={`text-sm font-medium transition-colors hover:text-primary-500 ${
-                  location.pathname === item.to ? 'text-primary-500' : 'text-gray-700'
+            <Link
+              to="/"
+              className={`text-sm font-medium transition-colors hover:text-primary-500 ${
+                location.pathname === '/' ? 'text-primary-500' : 'text-gray-700'
+              }`}
+            >
+              Home
+            </Link>
+            <Link
+              to="/about"
+              className={`text-sm font-medium transition-colors hover:text-primary-500 ${
+                location.pathname === '/about' ? 'text-primary-500' : 'text-gray-700'
+              }`}
+            >
+              About
+            </Link>
+
+            {/* Services dropdown */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                type="button"
+                onClick={() => setServicesOpen((o) => !o)}
+                className={`inline-flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded ${
+                  isServicesPage ? 'text-primary-500' : 'text-gray-700'
                 }`}
+                aria-expanded={servicesOpen}
+                aria-haspopup="true"
+                aria-label="Services menu"
               >
-                {item.label}
-              </Link>
-            ))}
+                Services
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+              {servicesOpen && (
+                <div
+                  className="absolute left-0 top-full pt-2 min-w-[240px]"
+                  role="menu"
+                >
+                  <div className="bg-white rounded-lg shadow-lg border border-gray-100 py-1">
+                    {SERVICES_DATA.map((s) => (
+                      <Link
+                        key={s.slug}
+                        to={`/services?type=${s.slug}`}
+                        onClick={() => setServicesOpen(false)}
+                        role="menuitem"
+                        className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700"
+                      >
+                        {s.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <Link
+              to="/contact"
+              className={`text-sm font-medium transition-colors hover:text-primary-500 ${
+                location.pathname === '/contact' ? 'text-primary-500' : 'text-gray-700'
+              }`}
+            >
+              Contact
+            </Link>
           </nav>
 
           {/* CTA buttons */}
@@ -96,21 +166,72 @@ export default function Header() {
         {mobileOpen && (
           <nav className="md:hidden border-t bg-white" aria-label="Mobile navigation">
             <ul className="divide-y">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.to}>
-                  <Link
-                    to={item.to}
-                    onClick={() => setMobileOpen(false)}
-                    className={`block px-6 py-3 text-sm font-medium transition-colors ${
-                      location.pathname === item.to
-                        ? 'text-primary-500 bg-primary-50'
-                        : 'text-gray-700 hover:bg-gray-50'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link
+                  to="/"
+                  onClick={() => setMobileOpen(false)}
+                  className={`block px-6 py-3 text-sm font-medium transition-colors ${
+                    location.pathname === '/' ? 'text-primary-500 bg-primary-50' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about"
+                  onClick={() => setMobileOpen(false)}
+                  className={`block px-6 py-3 text-sm font-medium transition-colors ${
+                    location.pathname === '/about' ? 'text-primary-500 bg-primary-50' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  About
+                </Link>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => setMobileServicesOpen((o) => !o)}
+                  className={`flex items-center justify-between w-full px-6 py-3 text-sm font-medium transition-colors text-left ${
+                    isServicesPage ? 'text-primary-500 bg-primary-50' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                  aria-expanded={mobileServicesOpen}
+                >
+                  Services
+                  <ChevronDownIcon
+                    className={`w-4 h-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {mobileServicesOpen && (
+                  <ul className="bg-gray-50 border-t border-gray-100">
+                    {SERVICES_DATA.map((s) => (
+                      <li key={s.slug}>
+                        <Link
+                          to={`/services?type=${s.slug}`}
+                          onClick={() => {
+                            setMobileOpen(false)
+                            setMobileServicesOpen(false)
+                          }}
+                          className="block px-8 py-2.5 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          {s.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  onClick={() => setMobileOpen(false)}
+                  className={`block px-6 py-3 text-sm font-medium transition-colors ${
+                    location.pathname === '/contact' ? 'text-primary-500 bg-primary-50' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  Contact
+                </Link>
+              </li>
               <li>
                 <a
                   href="tel:9166223439"

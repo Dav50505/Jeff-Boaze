@@ -1,19 +1,25 @@
 @import "tailwindcss";
 
+/* Palette roles: see docs/COLOR-SCHEME.md */
 @theme {
   --color-primary-50: #eff6ff;
   --color-primary-100: #dbeafe;
   --color-primary-200: #bfdbfe;
   --color-primary-300: #93c5fd;
-  --color-primary-400: #60a5fa;
-  --color-primary-500: #1e56a0;
-  --color-primary-600: #163d7a;
+  --color-primary-400: #0066cc;
+  --color-primary-500: #1e5a9e;
+  --color-primary-600: #164a87;
   --color-primary-700: #0f2d5e;
   --color-primary-800: #0a1f42;
   --color-primary-900: #061430;
 
-  --color-accent-500: #f59e0b;
-  --color-accent-600: #d97706;
+  --color-accent-500: #f7941d;
+  --color-accent-600: #e55c00;
+
+  --color-gray-50: #f5f5f5;
+  --color-gray-100: #eeeeee;
+  --color-gray-600: #4a4a4a;
+  --color-gray-700: #333333;
 
   --color-emergency: #dc2626;
 
@@ -28,4 +34,35 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hero background: slow zoom-in then fade to next image */
+@keyframes hero-bg-cycle {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  27% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  33.333% {
+    transform: scale(1.05);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.05);
+    opacity: 0;
+  }
+}
+
+.hero-bg-slide {
+  background-color: #fff;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  opacity: 0;
+  transform: scale(1);
+  will-change: transform, opacity;
+  animation: hero-bg-cycle 36s linear infinite;
 }

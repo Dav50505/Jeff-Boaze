@@ -1,98 +1,28 @@
-import { Link } from 'react-router-dom'
-import RequestEstimateForm from '../components/RequestEstimateForm'
-import {
-  PhoneIcon,
-  FireIcon,
-  WrenchScrewdriverIcon,
-  BoltIcon,
-  HomeModernIcon,
-  CogIcon,
-  CheckCircleIcon,
-} from '../components/Icons'
-
-/* ------------------------------------------------------------------ */
-/*  Data                                                               */
-/* ------------------------------------------------------------------ */
-
-const SERVICES = [
-  {
-    icon: FireIcon,
-    title: 'Water Heater Services',
-    desc: 'Whether your water heater needs a repair, replacement, or a brand-new installation, our technicians handle both traditional tank and modern tankless systems. We help you choose the most efficient and cost-effective option for your home.',
-    bullets: ['Traditional water heater repair & replacement', 'Tankless water heater installation & service', 'Energy-efficient upgrades', 'Emergency hot water restoration'],
-    image: '/images/AdobeStock_62721104_Preview-340x227.jpg',
-  },
-  {
-    icon: WrenchScrewdriverIcon,
-    title: 'Plumbing Service & Repair',
-    desc: 'From minor leaks to complete re-pipes, we service all types of plumbing systems. Our team is trained in Wirsbo, Wardflex, Pex Piping, copper, ABS, and all water, sewer, and gas systems.',
-    bullets: ['Leak detection & repair', 'Pipe replacement & re-piping', 'Water pressure issues', 'All pipe materials: copper, PEX, ABS, CPVC'],
-    image: '/images/Faucet-2-sm.jpg',
-  },
-  {
-    icon: BoltIcon,
-    title: 'Emergency Plumbing Services',
-    desc: 'Plumbing emergencies don\'t wait — and neither do we. Call us anytime for burst pipes, major leaks, sewer backups, gas leaks, and more. We respond quickly to protect your home.',
-    bullets: ['Burst pipe repair', 'Sewer backup resolution', 'Gas leak response', 'Flood damage mitigation'],
-    image: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400&q=80',
-  },
-  {
-    icon: HomeModernIcon,
-    title: 'Residential Plumbing Construction',
-    desc: 'Jeff has plumbed thousands of homes from the ground up, from starter homes to 18,000+ sq. ft. custom estates. We partner with top general contractors to make your vision a reality.',
-    bullets: ['New home construction plumbing', 'Custom home builds', 'Kitchen & bathroom remodels', 'Addition & expansion plumbing'],
-    image: '/images/Plumbing-Plans-sm.jpg',
-  },
-  {
-    icon: CogIcon,
-    title: 'Plumbing Fixtures Installation',
-    desc: 'Upgrade your kitchen or bathroom with professional fixture installation. We handle faucets, sinks, showers, bathtubs, and more — ensuring everything is installed to code.',
-    bullets: ['Faucet & sink installation', 'Shower & bathtub replacement', 'Outdoor hose bibs', 'ADA-compliant fixture installs'],
-    image: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80',
-  },
-  {
-    icon: CogIcon,
-    title: 'Garbage Disposal Solutions',
-    desc: 'Whether your disposal is jammed, leaking, or needs a full replacement, we provide fast and affordable service to keep your kitchen running smoothly.',
-    bullets: ['Garbage disposal repair', 'New disposal installation', 'InSinkErator & all major brands', 'Dishwasher hookup coordination'],
-    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80',
-  },
-  {
-    icon: WrenchScrewdriverIcon,
-    title: 'Toilet Repair & Installation',
-    desc: 'From running toilets to complete replacements, we fix it fast. We also install low-flow and high-efficiency models to save water and money.',
-    bullets: ['Toilet leak & clog repair', 'Wax ring & flange replacement', 'New toilet installation', 'Low-flow & dual-flush upgrades'],
-    image: 'https://images.unsplash.com/photo-1620626011761-996317b8d101?w=400&q=80',
-  },
-  {
-    icon: CheckCircleIcon,
-    title: 'Sewer & Drain Service',
-    desc: 'Slow drains, sewer odors, or backups? We diagnose and resolve drain and sewer line issues with professional-grade equipment and decades of experience.',
-    bullets: ['Drain cleaning & clearing', 'Sewer line repair & replacement', 'Video camera inspection', 'Root intrusion removal'],
-    image: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400&q=80',
-  },
-  {
-    icon: FireIcon,
-    title: 'Gas Line Services',
-    desc: 'Gas line work requires precision and expertise. We handle installation, testing, and repair for natural gas and propane lines — safely and to code.',
-    bullets: ['Gas line installation', 'Leak detection & repair', 'Appliance gas hookups', 'Pressure testing & certification'],
-    image: '/images/AdobeStock_88633624_Preview-340x227.jpg',
-  },
-]
-
-/* ------------------------------------------------------------------ */
-/*  Component                                                          */
-/* ------------------------------------------------------------------ */
+import { useSearchParams } from 'react-router-dom'
+import { getServiceOrDefault } from '../data/servicesContent'
+import { getServiceImages } from '../data/serviceImages'
+import ServiceContent from '../components/ServiceContent'
+import ServicesCtaBar from '../components/ServicesCtaBar'
 
 export default function Services() {
+  const [searchParams] = useSearchParams()
+  const typeParam = searchParams.get('type')
+  const service = getServiceOrDefault(typeParam)
+  const imageUrls = getServiceImages(service.slug)
+
   return (
     <>
+      <ServicesCtaBar />
+
       {/* Page Hero */}
       <section className="bg-linear-to-br from-primary-800 to-primary-900 text-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Our Plumbing Services</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
+            {service.title}
+          </h1>
           <p className="text-primary-200 text-lg max-w-2xl leading-relaxed">
-            Full-service residential plumbing — from emergency repairs to new construction — backed by over 40 years of expertise.
+            Full-service residential plumbing — from emergency repairs to new
+            construction — backed by over 40 years of expertise.
           </p>
         </div>
       </section>
@@ -113,90 +43,48 @@ export default function Services() {
         </div>
       </div>
 
-      {/* Services list + sidebar */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-3 gap-10">
-          {/* Main content */}
-          <div className="lg:col-span-2 space-y-10">
-            {SERVICES.map((svc, idx) => (
-              <article
-                key={idx}
-                id={svc.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
-                className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100"
+      {/* Dynamic content – text left, images right on desktop; stacked on mobile */}
+      <section className="py-12 md:py-16 pb-24 lg:pb-16">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row gap-8 lg:gap-10">
+          {/* Left: text content */}
+          <div className="min-w-0 flex-1 lg:w-2/3">
+            <ServiceContent service={service} showTitle={false} />
+          </div>
+          {/* Right: images (sticky on desktop) */}
+          {imageUrls.length > 0 && (
+            <aside className="lg:w-1/3 lg:min-w-[280px] shrink-0">
+              <div
+                className={
+                  imageUrls.length === 1
+                    ? 'lg:sticky lg:top-24'
+                    : 'grid grid-cols-2 gap-4 lg:grid-cols-1 lg:sticky lg:top-24'
+                }
               >
-                {/* Service image */}
-                <div className="relative h-48 bg-gray-100 overflow-hidden">
-                  <img
-                    src={svc.image}
-                    alt={`${svc.title} - Jeff Boaze Plumbing`}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-4 left-4 w-12 h-12 rounded-lg bg-white shadow-md flex items-center justify-center">
-                    <svc.icon className="w-6 h-6 text-primary-500" />
+                {imageUrls.map((src, i) => (
+                  <div
+                    key={src}
+                    className={
+                      imageUrls.length === 1
+                        ? 'rounded-xl overflow-hidden shadow-sm border border-gray-100'
+                        : 'rounded-xl overflow-hidden shadow-sm border border-gray-100 aspect-4/3'
+                    }
+                  >
+                    <img
+                      src={src}
+                      alt={
+                        imageUrls.length === 1
+                          ? `${service.title} – Jeff Boaze Plumbing`
+                          : `Image ${i + 1} of ${imageUrls.length}: ${service.title} – Jeff Boaze Plumbing`
+                      }
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
-                </div>
-                
-                <div className="p-6 md:p-8">
-                  <h2 className="text-xl md:text-2xl font-bold text-primary-800 mb-4">{svc.title}</h2>
-                  <p className="text-gray-600 leading-relaxed mb-4">{svc.desc}</p>
-                  <ul className="grid sm:grid-cols-2 gap-2">
-                    {svc.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-2 text-sm text-gray-700">
-                        <CheckCircleIcon className="w-4 h-4 text-primary-400 mt-0.5 shrink-0" />
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          {/* Sidebar */}
-          <aside className="space-y-6">
-            <div className="sticky top-24">
-              <RequestEstimateForm compact heading="Get a Free Estimate" />
-
-              {/* Quick call card */}
-              <div className="mt-6 bg-primary-800 text-white rounded-xl p-6 text-center">
-                <p className="font-semibold mb-2">Prefer to talk?</p>
-                <a
-                  href="tel:9166223439"
-                  className="inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 text-primary-900 font-bold px-5 py-3 rounded-lg transition-colors"
-                >
-                  <PhoneIcon className="w-4 h-4" />
-                  (916) 622-3439
-                </a>
-                <p className="text-primary-300 text-xs mt-3">Mon–Fri 8:30 AM – 4:30 PM · Sat by appt</p>
+                ))}
               </div>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      {/* Bottom CTA */}
-      <section className="py-16 md:py-20 bg-primary-50 text-center">
-        <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-800 mb-4">Don't See Your Issue Listed?</h2>
-          <p className="text-gray-600 mb-8">
-            We handle all residential plumbing needs. Call us to discuss your project — we'll find the right solution.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a
-              href="tel:9166223439"
-              className="inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white font-bold px-8 py-3.5 rounded-lg transition-colors"
-            >
-              <PhoneIcon className="w-5 h-5" />
-              Call Us Today
-            </a>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 border-2 border-primary-500 text-primary-600 hover:bg-primary-500 hover:text-white font-bold px-8 py-3.5 rounded-lg transition-colors"
-            >
-              Send a Message
-            </Link>
-          </div>
+            </aside>
+          )}
         </div>
       </section>
     </>
