@@ -30,6 +30,7 @@ export const SERVICE_SLUGS = [
   'plumbing-fixture-installation',
   'water-heater',
   'tankless-water-heaters',
+  'gas-line-services',
   'garbage-disposal-solutions',
   'toilet-repair-installation',
 ] as const
@@ -306,6 +307,97 @@ export const SERVICES_DATA: ServiceEntry[] = [
           'There are many different sizes and styles of tankless water heaters, including electric, natural gas, and propane, in single-room or whole-house sizes. Generally, you can replace an existing conventional water heater with a similarly powered tankless unit, however there are considerations depending on the type of tankless water heater. For electric systems, additional voltage and amperage may be required. For gas systems, there must be proper ventilation and the correct size gas line.',
           'Before purchasing a tankless water heater, you will need to determine your hot water usage, which is measured in gallons per minute (GPM), and figure out your maximum hot water demand. A typical shower requires about 2.5 GPM; dishwashers, washing machines, and other appliances all place additional demands on hot water production. Therefore, if you have multiple people showering or multiple appliances using hot water at the same time, you will need a larger water heater that delivers more gallons per minute.',
           'The average energy savings and additional lifespan make tankless heaters a viable option for many homes. In addition, many state and local utilities offer rebates and incentives for converting to energy-saving appliances, which can help mitigate the cost of installing a tankless system. However, if an additional gas line needs to be ran, a tankless water heater may not be the best option for your home due to the added cost which can run thousands of dollars.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'gas-line-services',
+    title: 'Gas Line Services',
+    content: [
+      {
+        type: 'section',
+        title: 'The Benefits of Natural Gas',
+        blocks: [
+          {
+            type: 'paragraph',
+            text: 'Ever wonder if natural gas is right for your home? If you want a clean, affordable, versatile, and readily available way to fuel appliances, natural gas is a strong option.',
+          },
+          {
+            type: 'paragraph',
+            text: 'If you need to accommodate more appliances on an existing gas line or install a new one, we can help.',
+          },
+          {
+            type: 'paragraph',
+            text: 'Natural gas can be used for many household appliances, including:',
+          },
+          {
+            type: 'list',
+            items: ['Dryers', 'Ovens', 'Stoves', 'Furnaces', 'Water Heaters'],
+          },
+        ],
+      },
+      {
+        type: 'section',
+        title: 'Gas Line Services',
+        blocks: [
+          {
+            type: 'paragraph',
+            text: 'Knowing whether your home uses natural gas or propane is important when buying a new gas appliance, because appliances should run on the same gas source.',
+          },
+          {
+            type: 'paragraph',
+            text: 'These appliances connect through gas lines. If you want to install a gas appliance where there was previously an electrical connection, a new gas line is typically required. We can take care of it for you.',
+          },
+        ],
+      },
+      {
+        type: 'section',
+        title: 'Gas Line Emergencies',
+        blocks: [
+          {
+            type: 'paragraph',
+            text: 'Gas lines carry flammable fuel throughout your home, so proper installation and ongoing maintenance are essential for safety.',
+          },
+          {
+            type: 'paragraph',
+            text: 'If you suspect a gas line issue, evacuate immediately and call both the fire department and your gas company.',
+          },
+          {
+            type: 'paragraph',
+            text: 'Once your home is declared safe by authorities, we can diagnose and repair the cause of the leak.',
+          },
+          {
+            type: 'paragraph',
+            text: 'Gas leaks can happen for reasons including:',
+          },
+          {
+            type: 'list',
+            items: [
+              'Damage to the line',
+              'Improper installation',
+              'Loose or faulty connections',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'section',
+        title: 'Benefits of Natural Gas',
+        blocks: [
+          {
+            type: 'list',
+            items: [
+              'Cleanliness: Natural gas is the cleanest-burning fossil fuel.',
+              'Affordability: Natural gas appliances are generally 20% to 30% cheaper to operate than electric alternatives.',
+              'Versatility: Natural gas supports many home applications and can continue working when the power goes out.',
+              'Effectiveness: Natural gas offers enhanced heating comfort and better temperature control.',
+            ],
+          },
+          {
+            type: 'paragraph',
+            text: 'Make powering your home’s appliances easier with professional gas line installation. Call Jeff Boaze Plumbing, Inc. today.',
+          },
         ],
       },
     ],

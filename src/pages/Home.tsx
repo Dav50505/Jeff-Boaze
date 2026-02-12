@@ -27,6 +27,7 @@ const SERVICE_ICON_BY_SLUG: Record<ServiceSlug, ComponentType<{ className?: stri
   'plumbing-fixture-installation': CogIcon,
   'water-heater': FireIcon,
   'tankless-water-heaters': BoltIcon,
+  'gas-line-services': FireIcon,
   'garbage-disposal-solutions': CheckCircleIcon,
   'toilet-repair-installation': ShieldCheckIcon,
 }
@@ -42,6 +43,8 @@ const SERVICE_CARD_DESCRIPTION_BY_SLUG: Record<ServiceSlug, string> = {
     'Water heater repair, replacement, and installation for reliable hot water every day.',
   'tankless-water-heaters':
     'On-demand tankless water heater solutions designed for efficiency, performance, and long-term savings.',
+  'gas-line-services':
+    'Safe gas line installation, line extensions, appliance hookups, and leak diagnostics for dependable home performance.',
   'garbage-disposal-solutions':
     'Garbage disposal troubleshooting, repair, and replacement to keep your kitchen running smoothly.',
   'toilet-repair-installation':
@@ -74,8 +77,8 @@ export default function Home() {
       {/* ============================================================= */}
       {/*  HERO                                                          */}
       {/* ============================================================= */}
-      <section className="relative bg-white text-black overflow-hidden">
-        {/* Cycling hero background: three images, slow zoom-in then fade */}
+      <section className="relative bg-white text-black overflow-hidden min-h-[560px] md:min-h-[640px] lg:min-h-[720px]">
+        {/* Cycling hero background: three images, fade-only crossfade */}
         <div className="absolute inset-0">
           {[
             '/images/hero/hero-1.png',
@@ -93,6 +96,7 @@ export default function Home() {
             />
           ))}
         </div>
+        <div className="absolute inset-0 bg-white/60 backdrop-blur-[1px]" aria-hidden />
         <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-28 lg:py-36">
           <div className="max-w-3xl">
             {/* Trust badge */}

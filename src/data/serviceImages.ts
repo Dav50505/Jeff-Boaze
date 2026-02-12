@@ -24,6 +24,10 @@ export const SERVICE_IMAGES: Record<string, ServiceImageConfig> = {
     folderName: 'Tankless Water Heaters',
     files: ['WaterHeater-On-Demand (1).jpg'],
   },
+  'gas-line-services': {
+    folderName: 'Gas',
+    files: ['gas.jpg', 'Water-Heater-x.jpg', 'WaterHeater-On-Demand (1).jpg'],
+  },
   'garbage-disposal-solutions': {
     folderName: 'Garbage Disposal Solutions',
     files: ['IMG_3265-768x576.jpg'],

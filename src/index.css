@@ -36,22 +36,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Hero background: slow zoom-in then fade to next image */
+/* Hero background: fade between slides without zoom */
 @keyframes hero-bg-cycle {
   0% {
-    transform: scale(1);
     opacity: 1;
   }
   27% {
-    transform: scale(1.05);
     opacity: 1;
   }
   33.333% {
-    transform: scale(1.05);
     opacity: 0;
   }
   100% {
-    transform: scale(1.05);
     opacity: 0;
   }
 }
@@ -60,9 +56,8 @@ body {
   background-color: #fff;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: auto 100%;
+  background-size: cover;
   opacity: 0;
-  transform: scale(1);
-  will-change: transform, opacity;
+  will-change: opacity;
   animation: hero-bg-cycle 36s linear infinite;
 }
