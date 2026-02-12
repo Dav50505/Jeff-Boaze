@@ -6,6 +6,7 @@ import {
   CheckCircleIcon,
   StarIcon,
 } from '../components/Icons'
+import Reveal from '../components/Reveal'
 
 const VALUES = [
   { icon: CheckCircleIcon, title: 'Honesty', desc: 'Transparent pricing with no hidden fees or unnecessary upsells.' },
@@ -26,78 +27,94 @@ export default function About() {
     <>
       {/* Page Hero */}
       <section className="bg-linear-to-br from-primary-800 to-primary-900 text-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4">
+        <Reveal className="site-container">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4">About Jeff Boaze Plumbing</h1>
           <p className="text-primary-200 text-lg max-w-2xl leading-relaxed">
             A 4th generation, family-owned plumbing company built on honesty, integrity, and quality workmanship —
             proudly serving the greater Sacramento area for over 40 years.
           </p>
-        </div>
+        </Reveal>
       </section>
 
-      {/* Our Story */}
+      {/* Story / Timeline / Image */}
       <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-start">
-          {/* Narrative */}
-          <div>
-            <h2 className="text-3xl font-bold text-primary-800 mb-6">Our Story</h2>
-            <div className="prose prose-gray max-w-none text-gray-600 space-y-4 leading-relaxed">
-              <p>
-                Jeff Boaze is a plumber through and through. Growing up in a family where plumbing was the family
-                trade, he learned the craft from a young age. With over <strong>40 years of hands-on experience</strong>,
-                Jeff has personally plumbed thousands of homes — from the ground up — including custom estates
-                exceeding 18,000 sq. ft., restaurants, water treatment facilities, and more.
-              </p>
-              <p>
-                In <strong>2007</strong>, Jeff and his wife Debbie opened Jeff Boaze Plumbing, Inc. in Folsom, CA.
-                Their goal was simple: bring the same level of care, expertise, and integrity that defines the Boaze
-                family tradition to every customer's doorstep.
-              </p>
-              <p>
-                In <strong>2014</strong>, their son <strong>Tyler</strong> joined the company, making it a true
-                4th generation family business. Tyler brings the same dedication and skill, ensuring the Boaze
-                legacy of excellence continues for years to come.
-              </p>
-              <p>
-                Jeff is known for his ability to "see the plumbing through the walls" — a skill developed over
-                decades that saves customers time, money, and the headache of unnecessary tear-outs. When other
-                plumbers are stumped, homeowners call Jeff.
-              </p>
-            </div>
+        <div className="site-container grid gap-8 md:gap-10 md:grid-cols-[1.2fr_0.8fr] xl:grid-cols-[1.25fr_1fr_0.75fr] 2xl:grid-cols-[1.35fr_1fr_0.68fr] items-start">
+          {/* Text cluster: stacked at <xl, split into separate columns at xl+ */}
+          <div className="space-y-10 xl:contents">
+            {/* Story */}
+            <Reveal>
+              <h2 className="text-3xl font-bold text-primary-800 mb-6">Our Story</h2>
+              <div className="prose prose-gray max-w-none text-gray-600 space-y-4 leading-relaxed">
+                <p>
+                  Jeff Boaze is a plumber through and through. Growing up in a family where plumbing was the family
+                  trade, he learned the craft from a young age. With over <strong>40 years of hands-on experience</strong>,
+                  Jeff has personally plumbed thousands of homes — from the ground up — including custom estates
+                  exceeding 18,000 sq. ft., restaurants, water treatment facilities, and more.
+                </p>
+                <p>
+                  In <strong>2007</strong>, Jeff and his wife Debbie opened Jeff Boaze Plumbing, Inc. in Folsom, CA.
+                  Their goal was simple: bring the same level of care, expertise, and integrity that defines the Boaze
+                  family tradition to every customer's doorstep.
+                </p>
+                <p>
+                  In <strong>2014</strong>, their son <strong>Tyler</strong> joined the company, making it a true
+                  4th generation family business. Tyler brings the same dedication and skill, ensuring the Boaze
+                  legacy of excellence continues for years to come.
+                </p>
+                <p>
+                  Jeff is known for his ability to "see the plumbing through the walls" — a skill developed over
+                  decades that saves customers time, money, and the headache of unnecessary tear-outs. When other
+                  plumbers are stumped, homeowners call Jeff.
+                </p>
+              </div>
+            </Reveal>
+
+            {/* Timeline */}
+            <Reveal className="relative pl-8 border-l-2 border-primary-200" direction="left">
+              {TIMELINE.map((item, i) => (
+                <Reveal key={i} className="mb-8 last:mb-0 relative" delayMs={i * 70}>
+                  <div className="absolute -left-[25px] top-0 w-4 h-4 rounded-full bg-primary-500 border-4 border-primary-100" />
+                  <span className="text-sm font-bold text-primary-500 uppercase tracking-wider">{item.year}</span>
+                  <p className="text-gray-600 mt-1 leading-relaxed text-sm">{item.text}</p>
+                </Reveal>
+              ))}
+            </Reveal>
           </div>
 
-          {/* Timeline */}
-          <div className="relative pl-8 border-l-2 border-primary-200">
-            {TIMELINE.map((item, i) => (
-              <div key={i} className="mb-8 last:mb-0 relative">
-                <div className="absolute -left-[25px] top-0 w-4 h-4 rounded-full bg-primary-500 border-4 border-primary-100" />
-                <span className="text-sm font-bold text-primary-500 uppercase tracking-wider">{item.year}</span>
-                <p className="text-gray-600 mt-1 leading-relaxed text-sm">{item.text}</p>
-              </div>
-            ))}
-          </div>
+          {/* Image */}
+          <Reveal className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm h-[360px] md:h-[420px] lg:h-[520px] xl:h-auto xl:aspect-[3/4]" direction="right" delayMs={70}>
+            <img
+              src="/images/about us/IMG_6354-x.jpg"
+              alt="Jeff Boaze performing plumbing repair work"
+              className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          </Reveal>
         </div>
       </section>
 
       {/* Values */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
+        <div className="site-container">
+          <Reveal className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-primary-800 mb-3">Our Values</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Every job, every customer, every time — these are the principles that guide us.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {VALUES.map((v) => (
-              <div key={v.title} className="bg-white rounded-xl p-6 text-center shadow-sm border border-gray-100">
-                <div className="w-14 h-14 rounded-full bg-primary-50 flex items-center justify-center mx-auto mb-4">
-                  <v.icon className="w-7 h-7 text-primary-500" />
+            {VALUES.map((v, i) => (
+              <Reveal key={v.title} delayMs={i * 70}>
+                <div className="bg-white rounded-xl p-6 text-center shadow-sm border border-gray-100">
+                  <div className="w-14 h-14 rounded-full bg-primary-50 flex items-center justify-center mx-auto mb-4">
+                    <v.icon className="w-7 h-7 text-primary-500" />
+                  </div>
+                  <h3 className="font-bold text-primary-800 mb-1">{v.title}</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{v.desc}</p>
                 </div>
-                <h3 className="font-bold text-primary-800 mb-1">{v.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{v.desc}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -105,7 +122,7 @@ export default function About() {
 
       {/* CTA */}
       <section className="py-16 md:py-20 bg-primary-50 text-center">
-        <div className="max-w-3xl mx-auto px-4">
+        <Reveal className="max-w-3xl mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-primary-800 mb-4">
             Ready to Work with a Plumber You Can Trust?
           </h2>
@@ -128,7 +145,7 @@ export default function About() {
               Request Free Estimate
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
     </>
   )

@@ -34,7 +34,7 @@ export default function Header() {
     <>
       {/* Top bar – emergency + hours */}
       <div className="bg-primary-800 text-white text-sm hidden md:block">
-        <div className="max-w-7xl mx-auto px-4 py-1.5 flex justify-between items-center">
+        <div className="site-container py-1.5 flex justify-between items-center">
           <span className="flex items-center gap-1.5">
             <span className="inline-block w-2 h-2 rounded-full bg-emergency animate-pulse" />
             24/7 Emergency Service Available
@@ -45,19 +45,15 @@ export default function Header() {
 
       {/* Main sticky header */}
       <header className="sticky top-0 z-50 bg-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4 h-16 md:h-20 flex items-center justify-between">
+        <div className="site-container h-16 md:h-20 flex items-center justify-between">
           {/* Logo / brand */}
-          <Link to="/" className="flex items-center gap-3 shrink-0" aria-label="Jeff Boaze Plumbing home">
+          <Link to="/" className="flex items-center shrink-0" aria-label="Jeff Boaze Plumbing home">
             <img
               src="/images/JeffB-Logo2.png"
               alt="Jeff Boaze Plumbing logo"
               className="h-12 md:h-14 w-auto"
               loading="eager"
             />
-            <div className="leading-tight hidden sm:block">
-              <span className="text-primary-700 font-bold text-lg md:text-xl tracking-tight">Jeff Boaze Plumbing</span>
-              <span className="block text-[11px] text-gray-500 -mt-0.5">Never a Problem, Only a Solution</span>
-            </div>
           </Link>
 
           {/* Desktop nav */}

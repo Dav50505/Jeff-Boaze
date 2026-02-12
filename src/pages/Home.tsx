@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import type { ComponentType } from 'react'
 import RequestEstimateForm from '../components/RequestEstimateForm'
+import Reveal from '../components/Reveal'
 import { SERVICES_DATA, type ServiceSlug } from '../data/servicesContent'
 import {
   PhoneIcon,
@@ -97,8 +98,8 @@ export default function Home() {
           ))}
         </div>
         <div className="absolute inset-0 bg-white/60 backdrop-blur-[1px]" aria-hidden />
-        <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-28 lg:py-36">
-          <div className="max-w-3xl">
+        <div className="relative site-container py-20 md:py-28 lg:py-36">
+          <Reveal className="max-w-3xl" direction="left" delayMs={80}>
             {/* Trust badge */}
             <div className="inline-flex items-center gap-2 bg-white/80 text-black border border-black/10 backdrop-blur-sm text-sm font-medium px-4 py-1.5 rounded-full mb-6">
               <span className="flex gap-0.5 text-accent-500">
@@ -136,7 +137,7 @@ export default function Home() {
                 Request Free Estimate
               </Link>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -144,7 +145,7 @@ export default function Home() {
       {/*  EMERGENCY BANNER                                              */}
       {/* ============================================================= */}
       <div className="bg-emergency">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-center gap-2 text-white text-center">
+        <Reveal className="site-container py-3 flex flex-col sm:flex-row items-center justify-center gap-2 text-white text-center">
           <span className="flex items-center gap-2 font-semibold">
             <span className="w-2.5 h-2.5 rounded-full bg-white animate-pulse" />
             Plumbing Emergency?
@@ -155,34 +156,35 @@ export default function Home() {
           >
             Call (916) 622-3439 Now — We're Available 24/7
           </a>
-        </div>
+        </Reveal>
       </div>
 
       {/* ============================================================= */}
       {/*  SERVICES                                                      */}
       {/* ============================================================= */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
+        <div className="site-container">
+          <Reveal className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-primary-800 mb-3">Our Plumbing Services</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               From emergency repairs to full-home construction plumbing, Jeff Boaze Plumbing handles it all with over four decades of expertise.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {SERVICES_DATA.map((svc) => {
+            {SERVICES_DATA.map((svc, i) => {
               const Icon = SERVICE_ICON_BY_SLUG[svc.slug as ServiceSlug]
               return (
-              <Link
-                key={svc.slug}
-                to={`/services?type=${svc.slug}`}
-                className="group bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-primary-200 transition-all"
-              >
-                <Icon className="w-10 h-10 text-primary-500 mb-4 group-hover:text-primary-600 transition-colors" />
-                <h3 className="text-lg font-bold text-primary-800 mb-1">{svc.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{SERVICE_CARD_DESCRIPTION_BY_SLUG[svc.slug as ServiceSlug]}</p>
-              </Link>
+                <Reveal key={svc.slug} delayMs={i * 70}>
+                  <Link
+                    to={`/services?type=${svc.slug}`}
+                    className="group block bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-primary-200 transition-all"
+                  >
+                    <Icon className="w-10 h-10 text-primary-500 mb-4 group-hover:text-primary-600 transition-colors" />
+                    <h3 className="text-lg font-bold text-primary-800 mb-1">{svc.title}</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">{SERVICE_CARD_DESCRIPTION_BY_SLUG[svc.slug as ServiceSlug]}</p>
+                  </Link>
+                </Reveal>
               )
             })}
           </div>
@@ -194,25 +196,27 @@ export default function Home() {
       {/*  WHY CHOOSE US                                                 */}
       {/* ============================================================= */}
       <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
+        <div className="site-container">
+          <Reveal className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-primary-800 mb-3">Why Choose Jeff Boaze Plumbing?</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               We're not just any plumber — we're your neighbors. Here's why thousands of families trust us.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {WHY_US.map((item) => (
-              <div key={item.title} className="flex gap-4">
-                <div className="shrink-0 w-12 h-12 rounded-lg bg-primary-50 flex items-center justify-center">
-                  <item.icon className="w-6 h-6 text-primary-500" />
+            {WHY_US.map((item, i) => (
+              <Reveal key={item.title} delayMs={i * 70} direction={i % 2 === 0 ? 'left' : 'right'}>
+                <div className="flex gap-4">
+                  <div className="shrink-0 w-12 h-12 rounded-lg bg-primary-50 flex items-center justify-center">
+                    <item.icon className="w-6 h-6 text-primary-500" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-primary-800 mb-1">{item.title}</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-bold text-primary-800 mb-1">{item.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -222,7 +226,7 @@ export default function Home() {
       {/*  TESTIMONIAL                                                   */}
       {/* ============================================================= */}
       <section className="py-16 md:py-24 bg-primary-50">
-        <div className="max-w-4xl mx-auto px-4 text-center">
+        <Reveal className="max-w-4xl mx-auto px-4 text-center">
           <div className="flex justify-center gap-1 text-accent-500 mb-4">
             {[...Array(5)].map((_, i) => (
               <StarIcon key={i} className="w-6 h-6" />
@@ -245,32 +249,31 @@ export default function Home() {
           >
             Read more reviews on Yelp &rarr;
           </a>
-        </div>
+        </Reveal>
       </section>
 
       {/* ============================================================= */}
       {/*  SERVICE AREAS                                                 */}
       {/* ============================================================= */}
       <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
+        <div className="site-container">
+          <Reveal className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-primary-800 mb-3">Areas We Serve</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Proudly serving homeowners and businesses across Sacramento and Placer counties.
               Whether you're near Folsom Lake or the El Dorado Hills Town Center, our technicians are just minutes away.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {SERVICE_AREAS.map((area) => (
-              <div
-                key={area.zip}
-                className="bg-primary-50 rounded-xl p-5 text-center border border-primary-100"
-              >
-                <MapPinIcon className="w-8 h-8 text-primary-500 mx-auto mb-2" />
-                <h3 className="font-bold text-primary-800">{area.name}</h3>
-                <span className="text-sm text-gray-500">{area.zip}</span>
-              </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {SERVICE_AREAS.map((area, i) => (
+              <Reveal key={area.zip} delayMs={i * 70}>
+                <div className="bg-primary-50 rounded-xl p-5 text-center border border-primary-100">
+                  <MapPinIcon className="w-8 h-8 text-primary-500 mx-auto mb-2" />
+                  <h3 className="font-bold text-primary-800">{area.name}</h3>
+                  <span className="text-sm text-gray-500">{area.zip}</span>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -280,9 +283,9 @@ export default function Home() {
       {/*  ESTIMATE FORM                                                 */}
       {/* ============================================================= */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-2xl mx-auto px-4">
+        <Reveal className="max-w-2xl mx-auto px-4">
           <RequestEstimateForm />
-        </div>
+        </Reveal>
       </section>
     </>
   )

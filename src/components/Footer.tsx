@@ -14,7 +14,7 @@ export default function Footer() {
     <footer className="bg-primary-900 text-gray-300">
       {/* CTA banner */}
       <div className="bg-primary-700">
-        <div className="max-w-7xl mx-auto px-4 py-8 text-center">
+        <div className="site-container py-8 text-center">
           <h2 className="text-white text-2xl md:text-3xl font-bold mb-2">
             Ready to Solve Your Plumbing Problem?
           </h2>
@@ -38,7 +38,7 @@ export default function Footer() {
       </div>
 
       {/* Footer columns */}
-      <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="site-container py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Company info */}
         <div>
           <div className="flex items-center gap-2 mb-4">
@@ -100,7 +100,7 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-primary-800">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-2">
+        <div className="site-container py-4 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-2">
           <p>&copy; {year} Jeff Boaze Plumbing, Inc. All rights reserved.</p>
           <p>CA License #1012513 &nbsp;|&nbsp; Fully Licensed &amp; Insured</p>
         </div>
